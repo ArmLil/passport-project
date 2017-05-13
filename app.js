@@ -14,7 +14,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/loginapp');
+mongoose.connect('mongodb://localhost/passport-project');
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
@@ -72,6 +72,7 @@ app.use(flash());
 
 // Global Vars
 app.use(function (req, res, next) {
+  //this is connected with layout.handlebars {{#if success_msg}}
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');

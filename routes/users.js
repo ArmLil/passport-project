@@ -35,6 +35,7 @@ router.post('/register', function(req, res){
 
 	var errors = req.validationErrors();
 
+//this is connected with register.handlebars {{#if errors}}
 	if(errors){
 		res.render('register',{
 			errors:errors
@@ -58,6 +59,7 @@ router.post('/register', function(req, res){
 	}
 });
 
+//this part from passportjs.org/docs/username-password
 passport.use(new LocalStrategy(
   function(username, password, done) {
    User.getUserByUsername(username, function(err, user){
@@ -77,6 +79,7 @@ passport.use(new LocalStrategy(
    });
   }));
 
+//this part from passportjs.org/docs/username-password
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -87,6 +90,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+//this part from pasportjs.org link
 router.post('/login',
   passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
   function(req, res) {
